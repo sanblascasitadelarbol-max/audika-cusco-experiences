@@ -1,0 +1,6 @@
+SOLO_ADMIN/calendarios_privados.json
+*calendarios_privados*.json
+*.ics
+*.private*
+__pycache__/
+.env
