@@ -1,36 +1,11 @@
-name: Publicar Audika y sincronizar calendarios Airbnb
+name: Audika - sincronizacion pausada
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-  schedule:
-    - cron: '17 * * * *'
 permissions:
   contents: read
-  pages: write
-  id-token: write
-concurrency:
-  group: pages
-  cancel-in-progress: false
 jobs:
-  publicar:
+  pausa:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Sincronizar calendarios
-        env:
-          AUDIKA_ICAL_FEEDS_JSON: ${{ secrets.AUDIKA_ICAL_FEEDS_JSON }}
-        run: python SOLO_ADMIN/actualizar_calendarios.py
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: web_publica
-      - name: Publicar
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: No ejecutar sincronizacion ni publicacion
+        run: echo 'Audika pausado a solicitud del propietario'
